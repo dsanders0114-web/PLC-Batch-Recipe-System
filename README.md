@@ -101,59 +101,6 @@ Each step must finish before the next begins.
 
 
 
-
-                BATCH MIXING SYSTEM (PLC CONTROL)
-
-        ┌──────────────┐
-        │  Recipe      │
-        │  Selection   │
-        │ (1 / 2 / 3)  │
-        └──────┬───────┘
-               │
-               ▼
-     ┌─────────────────────┐
-     │  Recipe Parameters  │
-     │---------------------│
-     │ Fill Targets        │
-     │ Mix Time            │
-     │ Temperature SP      │
-     └─────────┬───────────┘
-               │
-               ▼
-        ┌──────────────┐
-        │   MIXING     │
-        │    TANK      │
-        │              │
-        │  ┌────────┐  │
-Valve 1 ──▶│        │  │
-Valve 2 ──▶│        │  │
-Valve 3 ──▶│        │  │
-        │  │        │  │
-        │  └────────┘  │
-        │     ▲        │
-        │     │        │
-        │  Mixer       │
-        │  Motor       │
-        │     │        │
-        │  Heater      │
-        └─────┬────────┘
-              │
-              ▼
-     ┌─────────────────────┐
-     │   PLC CONTROL       │
-     │---------------------│
-     │ Sequence Logic      │
-     │ Timers             │
-     │ Comparisons        │
-     │ Recipe Loading     │
-     └─────────┬──────────┘
-               │
-               ▼
-        ┌──────────────┐
-        │ Batch        │
-        │ Complete     │
-        │ Indicator    │
-        └──────────────┘
 ---
 
 ## Author
