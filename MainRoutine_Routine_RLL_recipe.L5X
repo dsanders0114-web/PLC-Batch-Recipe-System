@@ -1,0 +1,986 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<RSLogix5000Content SchemaRevision="1.0" SoftwareRevision="36.00" TargetName="MainRoutine" TargetType="Routine" TargetSubType="RLL" ContainsContext="true" ExportDate="Wed Mar 25 08:15:04 2026" ExportOptions="References NoRawData L5KData DecoratedData Context Dependencies ForceProtectedEncoding AllProjDocTrans">
+<Controller Use="Context" Name="recipe_driven_batch_making_process">
+<DataTypes Use="Context">
+</DataTypes>
+<Programs Use="Context">
+<Program Use="Context" Name="MainProgram">
+<Tags Use="Context">
+<Tag Name="Active_Fill1_SP" TagType="Base" DataType="REAL" Radix="Float" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+<Description>
+<![CDATA[Active ingredient 1 target]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</Data>
+<Data Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</Data>
+</Tag>
+<Tag Name="Active_Fill2_SP" TagType="Base" DataType="REAL" Radix="Float" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+<Description>
+<![CDATA[ACTIVE INGREDIENT 2 TARGET]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</Data>
+<Data Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</Data>
+</Tag>
+<Tag Name="Active_Fill3_SP" TagType="Base" DataType="REAL" Radix="Float" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+<Description>
+<![CDATA[Active ingredient 3 target]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</Data>
+<Data Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</Data>
+</Tag>
+<Tag Name="Active_MIxTime_SP" TagType="Base" DataType="DINT" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+<Description>
+<![CDATA[Active mix time]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[0]]>
+</Data>
+<Data Format="Decorated">
+<DataValue DataType="DINT" Radix="Decimal" Value="0"/>
+</Data>
+</Tag>
+<Tag Name="Active_Temp_SP" TagType="Base" DataType="REAL" Radix="Float" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+<Description>
+<![CDATA[Active temperature setpoint]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</Data>
+<Data Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</Data>
+</Tag>
+<Tag Name="Batch_Active" TagType="Base" DataType="BOOL" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+<Description>
+<![CDATA[batch is currently running]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[0]]>
+</Data>
+<Data Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</Data>
+</Tag>
+<Tag Name="Batch_Complete_Light" TagType="Base" DataType="BOOL" Radix="Decimal" Usage="Output" Constant="false" ExternalAccess="Read Only" OpcUaAccess="None">
+<Description>
+<![CDATA[Batch complete pilot flight]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[0]]>
+</Data>
+<Data Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</Data>
+</Tag>
+<Tag Name="Batch_Start_Request" TagType="Base" DataType="BOOL" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+<Description>
+<![CDATA[One-Scan start request]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[0]]>
+</Data>
+<Data Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</Data>
+</Tag>
+<Tag Name="Fill1_Done" TagType="Base" DataType="BOOL" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+<Description>
+<![CDATA[Fill 1 complete]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[0]]>
+</Data>
+<Data Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</Data>
+</Tag>
+<Tag Name="Fill1_Total" TagType="Base" DataType="REAL" Radix="Float" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+<Description>
+<![CDATA[Accumilated ingredient 1 amount]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</Data>
+<Data Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</Data>
+</Tag>
+<Tag Name="Fill2_Done" TagType="Base" DataType="BOOL" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+<Description>
+<![CDATA[Fill 2 complete]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[0]]>
+</Data>
+<Data Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</Data>
+</Tag>
+<Tag Name="Fill2_Total" TagType="Base" DataType="REAL" Radix="Float" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+<Description>
+<![CDATA[Accumilated ingredient 2 amount]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</Data>
+<Data Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</Data>
+</Tag>
+<Tag Name="Fill3_Done" TagType="Base" DataType="BOOL" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+<Description>
+<![CDATA[Fill 3 complete]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[0]]>
+</Data>
+<Data Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</Data>
+</Tag>
+<Tag Name="Fill3_Total" TagType="Base" DataType="REAL" Radix="Float" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+<Description>
+<![CDATA[Accumilated ingredient 3 amount]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</Data>
+<Data Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</Data>
+</Tag>
+<Tag Name="Heat_Enable" TagType="Base" DataType="BOOL" Radix="Decimal" Usage="Output" Constant="false" ExternalAccess="Read Only" OpcUaAccess="None">
+<Description>
+<![CDATA[Simulated heater enabled]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[0]]>
+</Data>
+<Data Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</Data>
+</Tag>
+<Tag Name="Mix_Done" TagType="Base" DataType="BOOL" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+<Description>
+<![CDATA[Mix step complete]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[1]]>
+</Data>
+<Data Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="1"/>
+</Data>
+</Tag>
+<Tag Name="Mixer_Motor" TagType="Base" DataType="BOOL" Radix="Decimal" Usage="Output" Constant="false" ExternalAccess="Read Only" OpcUaAccess="None">
+<Description>
+<![CDATA[Mixer motor output]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[0]]>
+</Data>
+<Data Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</Data>
+</Tag>
+<Tag Name="ONS_Complete" TagType="Base" DataType="BOOL" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+<Description>
+<![CDATA[One-shot storage for batch complete transition]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[0]]>
+</Data>
+<Data Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</Data>
+</Tag>
+<Tag Name="ONS_RecipeLoad" TagType="Base" DataType="BOOL" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+<Description>
+<![CDATA[One-shot storage for recipe loaded bit]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[0]]>
+</Data>
+<Data Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</Data>
+</Tag>
+<Tag Name="ONS_Start" TagType="Base" DataType="BOOL" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+<Description>
+<![CDATA[One-shot storage for start request]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[0]]>
+</Data>
+<Data Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</Data>
+</Tag>
+<Tag Name="PB_Reset" TagType="Base" DataType="BOOL" Radix="Decimal" Usage="Input" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+<Description>
+<![CDATA[reset pushbutton]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[0]]>
+</Data>
+<Data Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</Data>
+</Tag>
+<Tag Name="PB_Start" TagType="Base" DataType="BOOL" Radix="Decimal" Usage="Input" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+<Description>
+<![CDATA[start pushbutton]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[0]]>
+</Data>
+<Data Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</Data>
+</Tag>
+<Tag Name="PB_Stop" TagType="Base" DataType="BOOL" Radix="Decimal" Usage="Input" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+<Description>
+<![CDATA[stop pushbutton]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[1]]>
+</Data>
+<Data Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="1"/>
+</Data>
+</Tag>
+<Tag Name="Recipe_Fill1" TagType="Base" DataType="REAL" Dimensions="4" Radix="Float" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+<Description>
+<![CDATA[Ingredient 1 target by recipe]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[[0.00000000e+000,1.00000000e+001,8.00000000e+000,1.20000000e+001]]]>
+</Data>
+<Data Format="Decorated">
+<Array DataType="REAL" Dimensions="4" Radix="Float">
+<Element Index="[0]" Value="0.0"/>
+<Element Index="[1]" Value="10.0"/>
+<Element Index="[2]" Value="8.0"/>
+<Element Index="[3]" Value="12.0"/>
+</Array>
+</Data>
+</Tag>
+<Tag Name="Recipe_Fill2" TagType="Base" DataType="REAL" Dimensions="4" Radix="Float" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+<Description>
+<![CDATA[Ingredient 2 target by recipe]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[[0.00000000e+000,5.00000000e+000,7.00000000e+000,4.00000000e+000]]]>
+</Data>
+<Data Format="Decorated">
+<Array DataType="REAL" Dimensions="4" Radix="Float">
+<Element Index="[0]" Value="0.0"/>
+<Element Index="[1]" Value="5.0"/>
+<Element Index="[2]" Value="7.0"/>
+<Element Index="[3]" Value="4.0"/>
+</Array>
+</Data>
+</Tag>
+<Tag Name="Recipe_Fill3" TagType="Base" DataType="REAL" Dimensions="4" Radix="Float" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+<Description>
+<![CDATA[Ingredient 3 target by recipe]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[[0.00000000e+000,2.00000000e+000,3.00000000e+000,6.00000000e+000]]]>
+</Data>
+<Data Format="Decorated">
+<Array DataType="REAL" Dimensions="4" Radix="Float">
+<Element Index="[0]" Value="0.0"/>
+<Element Index="[1]" Value="2.0"/>
+<Element Index="[2]" Value="3.0"/>
+<Element Index="[3]" Value="6.0"/>
+</Array>
+</Data>
+</Tag>
+<Tag Name="Recipe_Loaded" TagType="Base" DataType="BOOL" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+<Description>
+<![CDATA[recipe parameters copied into active tags]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[0]]>
+</Data>
+<Data Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</Data>
+</Tag>
+<Tag Name="recipe_loaded_Enable" TagType="Base" DataType="BOOL" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+<Data Format="L5K">
+<![CDATA[0]]>
+</Data>
+<Data Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</Data>
+</Tag>
+<Tag Name="Recipe_MixTime" TagType="Base" DataType="DINT" Dimensions="4" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+<Description>
+<![CDATA[Mix time by recipe]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[[0,5000,7000,9000]]]>
+</Data>
+<Data Format="Decorated">
+<Array DataType="DINT" Dimensions="4" Radix="Decimal">
+<Element Index="[0]" Value="0"/>
+<Element Index="[1]" Value="5000"/>
+<Element Index="[2]" Value="7000"/>
+<Element Index="[3]" Value="9000"/>
+</Array>
+</Data>
+</Tag>
+<Tag Name="Recipe_Select" TagType="Base" DataType="DINT" Radix="Decimal" Usage="Input" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+<Description>
+<![CDATA[operator recipe selection: 1,2 or 3]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[0]]>
+</Data>
+<Data Format="Decorated">
+<DataValue DataType="DINT" Radix="Decimal" Value="0"/>
+</Data>
+</Tag>
+<Tag Name="Recipe_TempSP" TagType="Base" DataType="REAL" Dimensions="4" Radix="Float" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+<Description>
+<![CDATA[Temperature setpoint by recipe]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[[0.00000000e+000,1.20000000e+002,1.40000000e+002,1.60000000e+002]]]>
+</Data>
+<Data Format="Decorated">
+<Array DataType="REAL" Dimensions="4" Radix="Float">
+<Element Index="[0]" Value="0.0"/>
+<Element Index="[1]" Value="120.0"/>
+<Element Index="[2]" Value="140.0"/>
+<Element Index="[3]" Value="160.0"/>
+</Array>
+</Data>
+</Tag>
+<Tag Name="Step_Complete" TagType="Base" DataType="BOOL" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+<Description>
+<![CDATA[Batch complete]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[0]]>
+</Data>
+<Data Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</Data>
+</Tag>
+<Tag Name="Step_Fill1" TagType="Base" DataType="BOOL" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+<Description>
+<![CDATA[Fill ingredient 1]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[0]]>
+</Data>
+<Data Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</Data>
+</Tag>
+<Tag Name="Step_Fill2" TagType="Base" DataType="BOOL" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+<Description>
+<![CDATA[Fill ingredient 2]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[0]]>
+</Data>
+<Data Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</Data>
+</Tag>
+<Tag Name="Step_Fill3" TagType="Base" DataType="BOOL" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+<Description>
+<![CDATA[Fill ingredient 3]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[0]]>
+</Data>
+<Data Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</Data>
+</Tag>
+<Tag Name="Step_Heat" TagType="Base" DataType="BOOL" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+<Description>
+<![CDATA[Heat to setpoint]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[0]]>
+</Data>
+<Data Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</Data>
+</Tag>
+<Tag Name="Step_Idle" TagType="Base" DataType="BOOL" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+<Description>
+<![CDATA[Idle]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[0]]>
+</Data>
+<Data Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</Data>
+</Tag>
+<Tag Name="Step_LoadRecipe" TagType="Base" DataType="BOOL" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+<Description>
+<![CDATA[Load recipe]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[0]]>
+</Data>
+<Data Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</Data>
+</Tag>
+<Tag Name="Step_Mix" TagType="Base" DataType="BOOL" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+<Description>
+<![CDATA[Mix]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[0]]>
+</Data>
+<Data Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</Data>
+</Tag>
+<Tag Name="System_Run" TagType="Base" DataType="BOOL" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+<Description>
+<![CDATA[Master run bit]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[0]]>
+</Data>
+<Data Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</Data>
+</Tag>
+<Tag Name="T_Fill1" TagType="Base" DataType="TIMER" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+<Description>
+<![CDATA[Ingredient 1 fill simulation timer]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[[0,500,0]]]>
+</Data>
+<Data Format="Decorated">
+<Structure DataType="TIMER">
+<DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="500"/>
+<DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0"/>
+<DataValueMember Name="EN" DataType="BOOL" Value="0"/>
+<DataValueMember Name="TT" DataType="BOOL" Value="0"/>
+<DataValueMember Name="DN" DataType="BOOL" Value="0"/>
+</Structure>
+</Data>
+</Tag>
+<Tag Name="T_Fill2" TagType="Base" DataType="TIMER" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+<Description>
+<![CDATA[Ingredient 2 fill simulation timer]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[[0,500,0]]]>
+</Data>
+<Data Format="Decorated">
+<Structure DataType="TIMER">
+<DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="500"/>
+<DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0"/>
+<DataValueMember Name="EN" DataType="BOOL" Value="0"/>
+<DataValueMember Name="TT" DataType="BOOL" Value="0"/>
+<DataValueMember Name="DN" DataType="BOOL" Value="0"/>
+</Structure>
+</Data>
+</Tag>
+<Tag Name="T_Fill3" TagType="Base" DataType="TIMER" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+<Description>
+<![CDATA[Ingredient 3 fill simulation timer]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[[0,500,0]]]>
+</Data>
+<Data Format="Decorated">
+<Structure DataType="TIMER">
+<DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="500"/>
+<DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0"/>
+<DataValueMember Name="EN" DataType="BOOL" Value="0"/>
+<DataValueMember Name="TT" DataType="BOOL" Value="0"/>
+<DataValueMember Name="DN" DataType="BOOL" Value="0"/>
+</Structure>
+</Data>
+</Tag>
+<Tag Name="T_Mix" TagType="Base" DataType="TIMER" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+<Description>
+<![CDATA[Mix timer]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[[0,0,0]]]>
+</Data>
+<Data Format="Decorated">
+<Structure DataType="TIMER">
+<DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="0"/>
+<DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0"/>
+<DataValueMember Name="EN" DataType="BOOL" Value="0"/>
+<DataValueMember Name="TT" DataType="BOOL" Value="0"/>
+<DataValueMember Name="DN" DataType="BOOL" Value="0"/>
+</Structure>
+</Data>
+</Tag>
+<Tag Name="T_TempRise" TagType="Base" DataType="TIMER" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+<Description>
+<![CDATA[Temperature rise simulation timer]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[[0,1000,0]]]>
+</Data>
+<Data Format="Decorated">
+<Structure DataType="TIMER">
+<DataValueMember Name="PRE" DataType="DINT" Radix="Decimal" Value="1000"/>
+<DataValueMember Name="ACC" DataType="DINT" Radix="Decimal" Value="0"/>
+<DataValueMember Name="EN" DataType="BOOL" Value="0"/>
+<DataValueMember Name="TT" DataType="BOOL" Value="0"/>
+<DataValueMember Name="DN" DataType="BOOL" Value="0"/>
+</Structure>
+</Data>
+</Tag>
+<Tag Name="Tank_Level" TagType="Base" DataType="REAL" Radix="Float" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+<Data Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</Data>
+<Data Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</Data>
+</Tag>
+<Tag Name="Temp_LevelSum" TagType="Base" DataType="REAL" Radix="Float" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+<Description>
+<![CDATA[Temporary math tag for total calculation]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</Data>
+<Data Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</Data>
+</Tag>
+<Tag Name="Temp_Pv" TagType="Base" DataType="REAL" Radix="Float" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+<Description>
+<![CDATA[simulated process temp]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[0.00000000e+000]]>
+</Data>
+<Data Format="Decorated">
+<DataValue DataType="REAL" Radix="Float" Value="0.0"/>
+</Data>
+</Tag>
+<Tag Name="Temp_Ready" TagType="Base" DataType="BOOL" Radix="Decimal" Constant="false" ExternalAccess="Read/Write" OpcUaAccess="None">
+<Description>
+<![CDATA[Temperature reached setpoint]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[0]]>
+</Data>
+<Data Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</Data>
+</Tag>
+<Tag Name="Valve_1" TagType="Base" DataType="BOOL" Radix="Decimal" Usage="Output" Constant="false" ExternalAccess="Read Only" OpcUaAccess="None">
+<Description>
+<![CDATA[ingredient 1 valve]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[0]]>
+</Data>
+<Data Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</Data>
+</Tag>
+<Tag Name="Valve_2" TagType="Base" DataType="BOOL" Radix="Decimal" Usage="Output" Constant="false" ExternalAccess="Read Only" OpcUaAccess="None">
+<Description>
+<![CDATA[ingredient 2 valve]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[0]]>
+</Data>
+<Data Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</Data>
+</Tag>
+<Tag Name="Valve_3" TagType="Base" DataType="BOOL" Radix="Decimal" Usage="Output" Constant="false" ExternalAccess="Read Only" OpcUaAccess="None">
+<Description>
+<![CDATA[ingredient 3 valve]]>
+</Description>
+<Data Format="L5K">
+<![CDATA[0]]>
+</Data>
+<Data Format="Decorated">
+<DataValue DataType="BOOL" Radix="Decimal" Value="0"/>
+</Data>
+</Tag>
+</Tags>
+<Routines Use="Context">
+<Routine Use="Target" Name="MainRoutine" Type="RLL">
+<RLLContent>
+<Rung Number="0" Type="N">
+<Comment>
+<![CDATA[Latches the system run bit when start is pressed and stop is not active]]>
+</Comment>
+<Text>
+<![CDATA[XIC(PB_Start)XIO(PB_Stop)OTE(System_Run);]]>
+</Text>
+</Rung>
+<Rung Number="1" Type="N">
+<Comment>
+<![CDATA[Unlatches the system run bit when stop is pressed]]>
+</Comment>
+<Text>
+<![CDATA[XIO(PB_Stop)OTU(System_Run);]]>
+</Text>
+</Rung>
+<Rung Number="2" Type="N">
+<Comment>
+<![CDATA[Turns on the idle step whenever no other sequence step is active]]>
+</Comment>
+<Text>
+<![CDATA[XIO(Step_LoadRecipe)XIO(Step_Fill1)XIO(Step_Fill2)XIO(Step_Fill3)XIO(Step_Heat)XIO(Step_Mix)XIO(Step_Complete)OTE(Step_Idle);]]>
+</Text>
+</Rung>
+<Rung Number="3" Type="N">
+<Comment>
+<![CDATA[Creates a one-scan start request when the operator initiates a batch from idle]]>
+</Comment>
+<Text>
+<![CDATA[XIC(System_Run)XIC(Step_Idle)XIC(PB_Start)ONS(ONS_Start)OTE(Batch_Start_Request);]]>
+</Text>
+</Rung>
+<Rung Number="4" Type="N">
+<Comment>
+<![CDATA[Starts the batch by entering the recipe load step and marking the process active]]>
+</Comment>
+<Text>
+<![CDATA[XIC(Batch_Start_Request)[OTL(Step_LoadRecipe) ,OTL(Batch_Active) ];]]>
+</Text>
+</Rung>
+<Rung Number="5" Type="N">
+<Comment>
+<![CDATA[Validates that the selected recipe number is within the allowed range]]>
+</Comment>
+<Text>
+<![CDATA[GE(Recipe_Select,1)LE(Recipe_Select,3)OTE(recipe_loaded_Enable);]]>
+</Text>
+</Rung>
+<Rung Number="6" Type="N">
+<Comment>
+<![CDATA[Copies the slected recipe's ingredient 1 target into the active setpoint tag]]>
+</Comment>
+<Text>
+<![CDATA[XIC(Step_LoadRecipe)XIC(recipe_loaded_Enable)MOVE(Recipe_Fill1[Recipe_Select],Active_Fill1_SP);]]>
+</Text>
+</Rung>
+<Rung Number="7" Type="N">
+<Comment>
+<![CDATA[Copies the slected recipe's ingredient 2 target into the active setpoint tag]]>
+</Comment>
+<Text>
+<![CDATA[XIC(Step_LoadRecipe)XIC(recipe_loaded_Enable)MOVE(Recipe_Fill2[Recipe_Select],Active_Fill2_SP);]]>
+</Text>
+</Rung>
+<Rung Number="8" Type="N">
+<Comment>
+<![CDATA[Copies the slected recipe's ingredient 3 target into the active setpoint tag]]>
+</Comment>
+<Text>
+<![CDATA[XIC(Step_LoadRecipe)XIC(recipe_loaded_Enable)MOVE(Recipe_Fill3[Recipe_Select],Active_Fill3_SP);]]>
+</Text>
+</Rung>
+<Rung Number="9" Type="N">
+<Comment>
+<![CDATA[Copies the slected recipe's mix time into the active mix time tag]]>
+</Comment>
+<Text>
+<![CDATA[XIC(Step_LoadRecipe)XIC(recipe_loaded_Enable)MOVE(Recipe_MixTime[Recipe_Select],Active_MIxTime_SP);]]>
+</Text>
+</Rung>
+<Rung Number="10" Type="N">
+<Comment>
+<![CDATA[Copies the selected recipe's temperature setpoint into the active temp tag]]>
+</Comment>
+<Text>
+<![CDATA[XIC(Step_LoadRecipe)XIC(recipe_loaded_Enable)MOVE(Recipe_TempSP[Recipe_Select],Active_Temp_SP);]]>
+</Text>
+</Rung>
+<Rung Number="11" Type="N">
+<Comment>
+<![CDATA[sets the recipe loaded bit once after valid recipe values are copied into the active tags]]>
+</Comment>
+<Text>
+<![CDATA[XIC(Step_LoadRecipe)XIC(recipe_loaded_Enable)ONS(ONS_RecipeLoad)OTL(Recipe_Loaded);]]>
+</Text>
+</Rung>
+<Rung Number="12" Type="N">
+<Comment>
+<![CDATA[moves the sequence recipe from loading to ingredient 1 fill once recipe parameters are loaded]]>
+</Comment>
+<Text>
+<![CDATA[XIC(Step_LoadRecipe)XIC(Recipe_Loaded)[OTL(Step_Fill1) ,OTU(Step_LoadRecipe) ];]]>
+</Text>
+</Rung>
+<Rung Number="13" Type="N">
+<Comment>
+<![CDATA[Opens valve 1 while the sequence is in fill 1 and the target has not yet been reached]]>
+</Comment>
+<Text>
+<![CDATA[XIC(Step_Fill1)XIC(Fill1_Done)OTE(Valve_1);]]>
+</Text>
+</Rung>
+<Rung Number="14" Type="N">
+<Comment>
+<![CDATA[Generates a timed pulse while vavle 1 is open to simulate ingredient 1 flow]]>
+</Comment>
+<Text>
+<![CDATA[XIC(Valve_1)TON(T_Fill1,?,?);]]>
+</Text>
+</Rung>
+<Rung Number="15" Type="N">
+<Comment>
+<![CDATA[Adds 1.0 units to ingredient 1 total each time the timer finishes and resets the timer for the next increment]]>
+</Comment>
+<Text>
+<![CDATA[XIC(T_Fill1.DN)XIC(Valve_1)[ADD(Fill1_Total,1.0,Fill1_Total) ,RES(T_Fill1) ];]]>
+</Text>
+</Rung>
+<Rung Number="16" Type="N">
+<Comment>
+<![CDATA[SEts the Fill 1 complete bit when ingredient 1 total reaches or exceeds the active setpoint]]>
+</Comment>
+<Text>
+<![CDATA[GE(Fill1_Total,Active_Fill1_SP)OTE(Fill1_Done);]]>
+</Text>
+</Rung>
+<Rung Number="17" Type="N">
+<Comment>
+<![CDATA[Advances the batch sequence from Fill 1 to Fill 2 when ingredient 1 is complete]]>
+</Comment>
+<Text>
+<![CDATA[XIC(Step_Fill1)XIC(Fill1_Done)[OTL(Step_Fill2) ,OTU(Step_Fill2) ];]]>
+</Text>
+</Rung>
+<Rung Number="18" Type="N">
+<Comment>
+<![CDATA[Opens valve 2 while the sequence is in Fill 2 and the target has not yet been reached]]>
+</Comment>
+<Text>
+<![CDATA[XIC(Step_Fill2)XIO(Fill2_Done)OTE(Valve_2);]]>
+</Text>
+</Rung>
+<Rung Number="19" Type="N">
+<Comment>
+<![CDATA[Generates a timed pulse while valve 2 is open to simulate ingredient 2 flow]]>
+</Comment>
+<Text>
+<![CDATA[XIC(Step_Fill2)TON(T_Fill2,?,?);]]>
+</Text>
+</Rung>
+<Rung Number="20" Type="N">
+<Comment>
+<![CDATA[Adds 1.0 units to ingredient 2 total each time the timer finishes and resets the timer for the next increment]]>
+</Comment>
+<Text>
+<![CDATA[XIC(T_Fill2.DN)XIC(Valve_2)[ADD(Fill2_Total,1.0,Fill2_Total) ,RES(T_Fill2) ];]]>
+</Text>
+</Rung>
+<Rung Number="21" Type="N">
+<Comment>
+<![CDATA[Sets the fill 2 complete bit when ingredient 2 total reaches or exceeds the active setpoint]]>
+</Comment>
+<Text>
+<![CDATA[GE(Fill2_Total,Active_Fill2_SP)OTE(Fill2_Done);]]>
+</Text>
+</Rung>
+<Rung Number="22" Type="N">
+<Comment>
+<![CDATA[Advances the sequence from fill 2 to fill 3 when ingredient 2 is complete]]>
+</Comment>
+<Text>
+<![CDATA[XIC(Step_Fill2)XIC(Fill2_Done)[OTL(Step_Fill3) ,OTU(Step_Fill2) ];]]>
+</Text>
+</Rung>
+<Rung Number="23" Type="N">
+<Comment>
+<![CDATA[Opens valve 3 while the sequence is in Fill 3 and the target has not yet been reached]]>
+</Comment>
+<Text>
+<![CDATA[XIC(Step_Fill3)XIO(Fill3_Done)OTE(Valve_3);]]>
+</Text>
+</Rung>
+<Rung Number="24" Type="N">
+<Comment>
+<![CDATA[Generates a timed pulse while valve 3 is open to simulate inmgredient 3 flow]]>
+</Comment>
+<Text>
+<![CDATA[XIC(Valve_3)TON(T_Fill3,?,?);]]>
+</Text>
+</Rung>
+<Rung Number="25" Type="N">
+<Comment>
+<![CDATA[Adds 1.0 units to ingredient 3 total each time the timer finishes and resets the timer for the next increment]]>
+</Comment>
+<Text>
+<![CDATA[XIC(T_Fill3.DN)XIC(Valve_3)[ADD(Fill3_Total,1.0,Fill3_Total) ,RES(T_Fill3) ];]]>
+</Text>
+</Rung>
+<Rung Number="26" Type="N">
+<Comment>
+<![CDATA[Sets the fill 3 complete bit when ingredient 3 total reaches or exceeds the active setpoint]]>
+</Comment>
+<Text>
+<![CDATA[GE(Fill3_Total,Active_Fill3_SP)OTE(Fill3_Done);]]>
+</Text>
+</Rung>
+<Rung Number="27" Type="N">
+<Comment>
+<![CDATA[Calculates total tank level as the sum of all three ingredient totals]]>
+</Comment>
+<Text>
+<![CDATA[[ADD(Fill1_Total,Fill2_Total,Temp_LevelSum) ,ADD(Temp_LevelSum,Fill3_Total,Tank_Level) ];]]>
+</Text>
+</Rung>
+<Rung Number="28" Type="N">
+<Comment>
+<![CDATA[Advances the batch sequence to heating once all ingredients are loaded]]>
+</Comment>
+<Text>
+<![CDATA[XIC(Step_Fill3)XIC(Fill3_Done)[OTL(Step_Heat) ,OTU(Step_Fill3) ];]]>
+</Text>
+</Rung>
+<Rung Number="29" Type="N">
+<Comment>
+<![CDATA[Turns on the heater during the heat step until the active temperature setpoint is reached]]>
+</Comment>
+<Text>
+<![CDATA[XIC(Step_Heat)XIO(Temp_Ready)OTE(Heat_Enable);]]>
+</Text>
+</Rung>
+<Rung Number="30" Type="N">
+<Comment>
+<![CDATA[Creates a timed pulse used to simulate rising temperature while heating is enabled]]>
+</Comment>
+<Text>
+<![CDATA[XIC(Heat_Enable)TON(T_TempRise,?,?);]]>
+</Text>
+</Rung>
+<Rung Number="31" Type="N">
+<Comment>
+<![CDATA[Raises the process temperature by 5 degrees each time the heating timer completes and resets the timer]]>
+</Comment>
+<Text>
+<![CDATA[XIC(T_TempRise.DN)XIC(Heat_Enable)[ADD(Temp_Pv,5.0,Temp_Pv) ,RES(T_TempRise) ];]]>
+</Text>
+</Rung>
+<Rung Number="32" Type="N">
+<Comment>
+<![CDATA[sets the temperature ready bit when the process temp reaches or exceeds the active setpoint]]>
+</Comment>
+<Text>
+<![CDATA[GE(Temp_Pv,Active_Temp_SP)OTE(Temp_Ready);]]>
+</Text>
+</Rung>
+<Rung Number="33" Type="N">
+<Comment>
+<![CDATA[Advances the sequence from heat to mix once the temperature target is reached]]>
+</Comment>
+<Text>
+<![CDATA[XIC(Step_Heat)XIC(Temp_Ready)[OTL(Step_Mix) ,OTU(Step_Heat) ];]]>
+</Text>
+</Rung>
+<Rung Number="34" Type="N">
+<Comment>
+<![CDATA[Runs the mixer while the sequence is in the Mix step and mixing is not complete]]>
+</Comment>
+<Text>
+<![CDATA[XIC(Step_Mix)XIO(Mix_Done)OTE(Mixer_Motor);]]>
+</Text>
+</Rung>
+<Rung Number="35" Type="N">
+<Comment>
+<![CDATA[Loads the active recipe mix time into the mix timer preset when the sequence enters the mix step]]>
+</Comment>
+<Text>
+<![CDATA[XIC(Step_Mix)MOVE(Active_MIxTime_SP,T_Mix.PRE);]]>
+</Text>
+</Rung>
+<Rung Number="36" Type="N">
+<Comment>
+<![CDATA[Sets the mix complete bit when the mix timer finishes]]>
+</Comment>
+<Text>
+<![CDATA[XIC(Step_Mix)TON(T_Mix,?,?);]]>
+</Text>
+</Rung>
+<Rung Number="37" Type="N">
+<Text>
+<![CDATA[XIC(T_Mix.DN)OTE(Mix_Done);]]>
+</Text>
+</Rung>
+<Rung Number="38" Type="N">
+<Comment>
+<![CDATA[turns on the batch complete indicator when the complete step is active]]>
+</Comment>
+<Text>
+<![CDATA[XIC(Step_Complete)OTE(Batch_Complete_Light);]]>
+</Text>
+</Rung>
+<Rung Number="39" Type="N">
+<Comment>
+<![CDATA[Unlatches the batch active bit once when the complete step is reached]]>
+</Comment>
+<Text>
+<![CDATA[XIC(Step_Complete)ONS(ONS_Complete)OTU(Batch_Active);]]>
+</Text>
+</Rung>
+<Rung Number="40" Type="N">
+<Comment>
+<![CDATA[clears all active sequence steps when reset is pressed]]>
+</Comment>
+<Text>
+<![CDATA[XIC(PB_Reset)[OTU(Step_LoadRecipe) ,OTU(Step_Fill1) ,OTU(Step_Fill2) ,OTU(Step_Fill3) ,OTU(Step_Heat) ,OTU(Step_Mix) ,OTU(Step_Complete) ];]]>
+</Text>
+</Rung>
+<Rung Number="41" Type="N">
+<Comment>
+<![CDATA[clears all status bits and the main run bit when Reset is pressed]]>
+</Comment>
+<Text>
+<![CDATA[XIC(PB_Reset)[OTU(Recipe_Loaded) ,OTU(Batch_Active) ,OTU(Fill1_Done) ,OTU(Fill2_Done) ,OTU(Fill3_Done) ,OTU(Temp_Ready) ,OTU(Mix_Done) ,OTU(System_Run) ];]]>
+</Text>
+</Rung>
+<Rung Number="42" Type="N">
+<Comment>
+<![CDATA[Restores ingredient totals, tank level, and temp to startup values]]>
+</Comment>
+<Text>
+<![CDATA[XIC(PB_Reset)[MOVE(0.0,Fill1_Total) ,MOVE(0.0,Fill2_Total) ,MOVE(0.0,Fill3_Total) ,MOVE(0.0,Tank_Level) ,MOVE(0.0,Temp_LevelSum) ,MOVE(70.0,Temp_Pv) ];]]>
+</Text>
+</Rung>
+<Rung Number="43" Type="N">
+<Text>
+<![CDATA[XIC(PB_Reset)[RES(T_Fill1) ,RES(T_Fill2) ,RES(T_Fill3) ,RES(T_TempRise) ,RES(T_Mix) ];]]>
+</Text>
+</Rung>
+</RLLContent>
+</Routine>
+</Routines>
+</Program>
+</Programs>
+</Controller>
+</RSLogix5000Content>
